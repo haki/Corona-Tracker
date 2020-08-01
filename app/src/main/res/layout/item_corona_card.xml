@@ -8,86 +8,86 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        app:cardCornerRadius="5dp"
         android:id="@+id/card_view"
+        style="@style/CardView.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/CardView.Light"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="#EFEFEF"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view2"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/countryFlag"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="10dp"
-                    android:elevation="12dp"
-                    app:cardCornerRadius="25dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/md" />
 
-                    <ImageView
-                        android:id="@+id/countryFlag"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/md" />
-
-                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/countryName"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Country Name"
-                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_marginLeft="12dp"
+                android:text="Country Name"
+                app:layout_constraintBottom_toTopOf="@+id/newConfirmed"
                 app:layout_constraintStart_toEndOf="@+id/card_view2"
-                app:layout_constraintTop_toTopOf="@+id/card_view2"
-                app:layout_constraintBottom_toTopOf="@+id/newConfirmed"/>
+                app:layout_constraintTop_toTopOf="@+id/card_view2" />
 
             <TextView
                 android:id="@+id/newConfirmed"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="New Confirmed: 345"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#8A000000"
                 android:layout_marginLeft="12dp"
+                android:text="New Confirmed: 345"
+                android:textColor="#8A000000"
                 app:layout_constraintStart_toEndOf="@+id/card_view2"
-                app:layout_constraintTop_toBottomOf="@+id/countryName"/>
+                app:layout_constraintTop_toBottomOf="@+id/countryName" />
 
-                <Button
-                    android:id="@+id/arrowBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/arrow_down"
-                    app:layout_constraintBottom_toBottomOf="@+id/card_view2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/card_view2"
-                    app:layout_constraintVertical_bias="0.55" />
+            <Button
+                android:id="@+id/arrowBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/arrow_down"
+                app:layout_constraintBottom_toBottomOf="@+id/card_view2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/card_view2"
+                app:layout_constraintVertical_bias="0.55" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expandableView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:orientation="vertical"
                 android:paddingBottom="12dp"
                 android:visibility="gone"
-                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newConfirmed">
