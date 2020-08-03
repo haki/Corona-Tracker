@@ -1,8 +1,8 @@
 package com.example.coronatracker
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var toast = Toast.makeText(this, "Parsing Corona Data...", Toast.LENGTH_SHORT)
+        toast.show()
+
         viewManager = LinearLayoutManager(this)
 
         val queue = Volley.newRequestQueue(this)
@@ -27,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         val jsonObjectRequest =
             JsonObjectRequest(Request.Method.GET, url, null, Response.Listener { response ->
                 val countries = response.getJSONArray("Countries")
-                viewAdapter = MyAdapter(countries)
+                var global = response.getJSONObject("Global")
+
+                viewAdapter = MyAdapter(countries, global)
+
                 recyclerView = findViewById<RecyclerView>(R.id.recview).apply {
                     setHasFixedSize(true)
                     layoutManager = viewManager

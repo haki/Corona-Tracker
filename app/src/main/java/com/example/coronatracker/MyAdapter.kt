@@ -13,20 +13,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import org.json.JSONObject
-import org.w3c.dom.Text
+import java.time.LocalDate
+import java.time.LocalTime
+import java.util.*
 
-class MyAdapter(private val myDataset: JSONArray) :
+class MyAdapter(private val myDataset: JSONArray, private val global: JSONObject) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     class MyViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-        private val countryName: TextView = itemView.findViewById(R.id.countryName)
-        private val countryFlag: ImageView = itemView.findViewById(R.id.countryFlag)
-        private val newConfirmed: TextView = itemView.findViewById(R.id.newConfirmed)
-        private val totalConfirmed: TextView = itemView.findViewById(R.id.totalConfirmed)
-        private val newDeaths: TextView = itemView.findViewById(R.id.newDeaths)
-        private val totalDeaths: TextView = itemView.findViewById(R.id.totalDeaths)
-        private val newRecovered: TextView = itemView.findViewById(R.id.newRecovered)
-        private val totalRecovered: TextView = itemView.findViewById(R.id.totalRecovered)
-        private val date: TextView = itemView.findViewById(R.id.date)
+        val countryName: TextView = itemView.findViewById(R.id.countryName)
+        val countryFlag: ImageView = itemView.findViewById(R.id.countryFlag)
+        val newConfirmed: TextView = itemView.findViewById(R.id.newConfirmed)
+        val totalConfirmed: TextView = itemView.findViewById(R.id.totalConfirmed)
+        val newDeaths: TextView = itemView.findViewById(R.id.newDeaths)
+        val totalDeaths: TextView = itemView.findViewById(R.id.totalDeaths)
+        val newRecovered: TextView = itemView.findViewById(R.id.newRecovered)
+        val totalRecovered: TextView = itemView.findViewById(R.id.totalRecovered)
+        val date: TextView = itemView.findViewById(R.id.date)
         val expandapleView: ConstraintLayout = itemView.findViewById(R.id.expandableView)
         val arrowBtn: Button = itemView.findViewById(R.id.arrowBtn)
 
@@ -37,7 +39,7 @@ class MyAdapter(private val myDataset: JSONArray) :
             countryName.text = country["Country"].toString()
             countryFlag.setImageResource(id)
             newConfirmed.text = "New Confirmed: " + country["NewConfirmed"].toString()
-            totalConfirmed.text = "TotalConfirmed: " + country["TotalConfirmed"].toString()
+            totalConfirmed.text = "Total Confirmed: " + country["TotalConfirmed"].toString()
             newDeaths.text = "New Deaths: " + country["NewDeaths"].toString()
             totalDeaths.text = "Total Deaths: " + country["TotalDeaths"].toString()
             newRecovered.text = "New Recovered: " + country["NewRecovered"].toString()
@@ -55,8 +57,21 @@ class MyAdapter(private val myDataset: JSONArray) :
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val country: JSONObject = myDataset.getJSONObject(position)
-        holder.bind(country)
+
+        if (position == 0) {
+            holder.countryName.text = "Global"
+            holder.countryFlag.setImageResource(R.drawable.globe)
+            holder.newConfirmed.text = "New Confirmed: " + global["NewConfirmed"].toString()
+            holder.totalConfirmed.text = "Total Confirmed: " + global["TotalConfirmed"].toString()
+            holder.newDeaths.text = "New Deaths: " + global["NewDeaths"].toString()
+            holder.totalDeaths.text = "Total Deaths: " + global["TotalDeaths"].toString()
+            holder.newRecovered.text = "New Recovered: " + global["NewRecovered"].toString()
+            holder.totalRecovered.text = "Total Recovered: " + global["TotalRecovered"].toString()
+            holder.date.text = "Date: " + LocalDate.now()
+        } else {
+            val country: JSONObject = myDataset.getJSONObject(position)
+            holder.bind(country)
+        }
 
         holder.arrowBtn.setOnClickListener {
             TransitionManager.beginDelayedTransition(holder.expandapleView, AutoTransition())
